@@ -1,0 +1,44 @@
+/*==============================================================*/
+/* DBMS name:      PostgreSQL 9.x                               */
+/* Created on:     27/07/2020 4:41:52 PM                        */
+/*==============================================================*/
+
+
+/*==============================================================*/
+/* Table: ARTICULO                                              */
+/*==============================================================*/
+create table Articulos (
+   ARTICULOID           SERIAL not null,
+   CATEGORIAID          INT4                 null,
+   DESCRIPCION          VARCHAR(100)         null,
+   COSTO                DECIMAL              null,
+   STOCK                DECIMAL              null,
+   PVP                  DECIMAL              null,
+   ESTADO               CHAR(1)              null,
+   constraint PK_ARTICULO primary key (ARTICULOID)
+);
+
+/*==============================================================*/
+/* Table: CATEGORIA                                             */
+/*==============================================================*/
+create table Categorias (
+   CATEGORIAID          SERIAL not null,
+   DESCRIPCION          VARCHAR(100)         null,
+   constraint PK_CATEGORIA primary key (CATEGORIAID)
+);
+
+/*==============================================================*/
+/* Table: USUARIO                                               */
+/*==============================================================*/
+create table Usuarios (
+   USUARIOID            SERIAL not null,
+   NOMBRE               VARCHAR(100)         null,
+   CLAVE                VARCHAR(10)          null,
+   ESTADO               CHAR(1)              null,
+   constraint PK_USUARIO primary key (USUARIOID)
+);
+
+alter table Articulos
+   add constraint FK_ARTICULO_REFERENCE_CATEGORI foreign key (CATEGORIAID)
+      references Categorias (CATEGORIAID)
+      on delete restrict on update restrict;
