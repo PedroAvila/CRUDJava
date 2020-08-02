@@ -6,13 +6,13 @@ package Persistencia;
 import java.sql.SQLException;
 
 
-public class ExcepcionCustome extends RuntimeException {
+public class ExcepcionCustomer extends RuntimeException {
     
-    public ExcepcionCustome(String message) {
+    public ExcepcionCustomer(String message) {
         super(message);
     }
 
-    public ExcepcionCustome(String message, Throwable cause) {
+    public ExcepcionCustomer(String message, Throwable cause) {
         super(message, cause);
     }
 }

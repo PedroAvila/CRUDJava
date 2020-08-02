@@ -15,7 +15,7 @@ public class Articulo {
     
     public int getArticuloId() {
         return ArticuloId;
-    }z
+    }
 
     
     public void setArticuloId(int ArticuloId) {
