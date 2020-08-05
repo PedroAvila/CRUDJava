@@ -7,7 +7,9 @@ package Persistencia.Repository;
 
 import Persistencia.Categoria;
 import Persistencia.IRepository;
+import java.util.List;
 import java.sql.*;
+import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 
 /*
@@ -18,9 +20,9 @@ public class CategoriaRepossitory implements IRepository<Categoria> {
     
     @Override
     public void Create(Categoria entity) {
-        String CATEGORIAS_INSERT_SQL = "INSERT INTO categorias(descripcion) VALUES(?)";
+        String query = "INSERT INTO categorias(descripcion) VALUES(?)";
         try (Connection cn = Conexion.Con();
-                PreparedStatement ps = cn.prepareStatement(CATEGORIAS_INSERT_SQL) ) {
+                PreparedStatement ps = cn.prepareStatement(query) ) {
                 ps.setString(1, entity.getDescripcion());
                 ps.execute();
         }catch(SQLException e) {
@@ -40,8 +42,25 @@ public class CategoriaRepossitory implements IRepository<Categoria> {
     }
 
     @Override
-    public DefaultTableModel List() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List<Categoria> Listar() {
+        ResultSet rs = null;
+        Statement stm = null;
+        String query = "SELECT * FROM categorias";
+        List<Categoria> categoria = new ArrayList<>();
+        try {
+                Connection cn = Conexion.Con();
+                stm = cn.createStatement();
+                rs = stm.executeQuery(query);
+                while(rs.next()){
+                    Categoria c = new Categoria();
+                    c.setCategoriaId(rs.getInt(1));
+                    c.setDescripcion(rs.getString(2));
+                    categoria.add(c);
+                }   
+        }catch(SQLException e) {
+            e.printStackTrace();
+        }
+        return categoria;
     }
     
 }

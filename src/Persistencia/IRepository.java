@@ -5,12 +5,12 @@
  */
 package Persistencia;
 
-import javax.swing.table.DefaultTableModel;
+import java.util.List;
 
 public interface IRepository<T>{                            
     void Create(T entity);
     void Update(T entity);                 
     void Delete(int id);   
-    DefaultTableModel List();                     
+    List<T> Listar();                     
 }          
           
